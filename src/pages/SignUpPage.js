@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom"
 export default function SignUpPage() {
   const [formulario, setFormulario] =useState({ nome:'', email: '', senha: ''})
   const [confirmaSenha, setConfirmaSenha] = useState('')
+  const navigate = useNavigate()
 
 function enviar(ele){
   ele.preventDefault()
@@ -19,7 +20,6 @@ function enviar(ele){
   }
   
   const promisse = axios.post('https://mywallet-27hy.onrender.com/sing-up', formulario)
-  const navigate = useNavigate()
   
     promisse.then(() => {
       navigate("/")
