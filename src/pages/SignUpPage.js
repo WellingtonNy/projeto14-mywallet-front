@@ -13,8 +13,10 @@ export default function SignUpPage() {
 
 function enviar(ele){
   ele.preventDefault()
+  alert(confirmaSenha)
+  alert(formulario.data)
 
-  if (formulario.senha !== confirmaSenha) {
+  if (+formulario.senha !== +confirmaSenha) {
     alert("A senha e a confirmação devem ser iguais")
     return
   }
@@ -32,7 +34,7 @@ function enviar(ele){
 }
 
 function montar(ele) {
-  setFormulario({ ...formulario, [ele.target.nome]: ele.target.value })
+  setFormulario({ ...formulario, [ele.target.name]: ele.target.value })
 }
 
 
@@ -42,8 +44,8 @@ function montar(ele) {
         <MyWalletLogo />
         <input placeholder="Nome" name="nome" value={formulario.nome} type="text" onChange={montar} />
         <input placeholder="E-mail" name="email" value={formulario.email} onChange={montar} type="email" />
-        <input placeholder="Senha" name="senha"  value={formulario.senha} onChange={montar} type="password" autocomplete="new-password" />
-        <input placeholder="Confirme a senha" value={confirmaSenha} onChange={e => setConfirmaSenha(e.target.value)}  type="password" autoComplete="new-password" />
+        <input placeholder="Senha" name="senha"  value={formulario.senha} onChange={montar} type="password" autoComplete="new-password" />
+        <input placeholder="Confirme a senha"  onChange={e => setConfirmaSenha(e.target.value)}  type="password" autoComplete="new-password" />
         <button type="submit">Cadastrar</button>
       </form>
 
