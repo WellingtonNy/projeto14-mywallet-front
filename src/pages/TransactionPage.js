@@ -11,7 +11,8 @@ import axios from "axios";
 export default function TransactionsPage() {
   
   const {tipo} = useParams()
-  const [formulario, setFormulario] =useState({valor: '', descricao: '',tipo:tipo})
+  
+  const [formulario, setFormulario] =useState({valor: '', descricao: '',tipo:tipo.substring(1)})
   const navigate = useNavigate()
   const {user} =useContext(UserContext)
   const tk = user.token
@@ -24,6 +25,7 @@ function enviar(ele){
       "authorization": tk
     }
   }
+  console.log('aqui',formulario);
   const promisse = axios.post('https://mywallet-27hy.onrender.com/transacao',formulario,conf)
 
   promisse.then(res=>{

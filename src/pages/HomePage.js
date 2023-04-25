@@ -16,6 +16,7 @@ export default function HomePage() {
   console.log(usu);
   const [tra,setTra]=useState([])
   const [saldo,setSaldo]=useState(0)
+  let mont=0
 
   
  function sair(){
@@ -47,12 +48,13 @@ alert(err.response.data)
 
 
 useEffect(()=>{
-  let mont =0
+  setSaldo(0)
+  mont = 0
 for (let i = 0; i < tra.length; i++) {
   if(tra[i].tipo==='entrada'){
-  mont+=tra[i].valor
+  mont+=(+tra[i].valor)
   }else{
-    mont-=tra[i].valor
+    mont-=(+tra[i].valor)
   }
   
   setSaldo(mont)
