@@ -13,8 +13,7 @@ export default function SignUpPage() {
 
 function enviar(ele){
   ele.preventDefault()
-  alert(confirmaSenha)
-  alert(formulario.data)
+  
 
   if (+formulario.senha !== +confirmaSenha) {
     alert("A senha e a confirmação devem ser iguais")
