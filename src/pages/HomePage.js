@@ -57,7 +57,7 @@ for (let i = 0; i < tra.length; i++) {
   
   setSaldo(mont)
 }
-},[])
+},[tra])
 
 
   return (
@@ -87,7 +87,7 @@ for (let i = 0; i < tra.length; i++) {
 
         <article>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>{saldo}</Value>
+          <Value color={saldo>=0 &&"positivo"}>{saldo}</Value>
         </article>
       </TransactionsContainer>
 
