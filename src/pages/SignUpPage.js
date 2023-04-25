@@ -15,7 +15,7 @@ function enviar(ele){
   ele.preventDefault()
   
 
-  if (+formulario.senha !== +confirmaSenha) {
+  if (formulario.senha !== confirmaSenha) {
     alert("A senha e a confirmação devem ser iguais")
     return
   }
