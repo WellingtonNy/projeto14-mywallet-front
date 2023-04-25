@@ -3,7 +3,7 @@ import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
 import { useContext, useState } from "react"
 import { UserContext } from "../contexts/UserContext";
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useEffect } from "react";
 import axios from "axios";
 
@@ -93,14 +93,18 @@ for (let i = 0; i < tra.length; i++) {
 
 
       <ButtonsContainer>
+      <Link to={'/nova-transacao/:entrada'}>
         <button>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
+        </Link>
+        <Link to={'/nova-transacao/:saida'}>
         <button>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>
+        </Link>
       </ButtonsContainer>
 
     </HomeContainer>
