@@ -1,20 +1,53 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
+import axios from "axios"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 
 export default function SignUpPage() {
+  const [formulario, setFormulario] =useState({ nome:'', email: '', senha: ''})
+  const [confirmaSenha, setConfirmaSenha] = useState('')
+
+function enviar(ele){
+  ele.preventDefault()
+
+  if (formulario.senha !== confirmaSenha) {
+    alert("A senha e a confirmação devem ser iguais")
+    return
+  }
+  
+  const promisse = axios.post('https://mywallet-27hy.onrender.com/sing-up', formulario)
+  const navigate = useNavigate()
+  
+    promisse.then(() => {
+      navigate("/")
+    })
+
+    promisse.catch((err) => {
+  alert(err.response.data)
+    })
+
+}
+
+function montar(ele) {
+  setFormulario({ ...formulario, [ele.target.nome]: ele.target.value })
+}
+
+
   return (
     <SingUpContainer>
-      <form>
+      <form onSubmit={enviar}>
         <MyWalletLogo />
-        <input placeholder="Nome" type="text" />
-        <input placeholder="E-mail" type="email" />
-        <input placeholder="Senha" type="password" autocomplete="new-password" />
-        <input placeholder="Confirme a senha" type="password" autocomplete="new-password" />
-        <button>Cadastrar</button>
+        <input placeholder="Nome" name="nome" value={formulario.nome} type="text" onChange={montar} />
+        <input placeholder="E-mail" name="email" value={formulario.email} onChange={montar} type="email" />
+        <input placeholder="Senha" name="senha"  value={formulario.senha} onChange={montar} type="password" autocomplete="new-password" />
+        <input placeholder="Confirme a senha" value={confirmaSenha} onChange={e => setConfirmaSenha(e.target.value)}  type="password" autoComplete="new-password" />
+        <button type="submit">Cadastrar</button>
       </form>
 
-      <Link>
+      <Link to={'/'}>
         Já tem uma conta? Entre agora!
       </Link>
     </SingUpContainer>
