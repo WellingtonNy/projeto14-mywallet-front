@@ -14,7 +14,7 @@ export default function HomePage() {
   const navigate = useNavigate()
   console.log(tk);
   console.log(usu);
-  const [tra,setTra]=useState()
+  const [tra,setTra]=useState(null)
 
   
  function sair(){
@@ -43,7 +43,7 @@ alert(err.response.data)
   })
 },[])
 
-console.log(tra)
+
 
   return (
     <HomeContainer>
@@ -54,13 +54,19 @@ console.log(tra)
 
       <TransactionsContainer>
         <ul>
-          <ListItemContainer>
+          
+          {tra.map((elemento)=>{
+            return(
+            <ListItemContainer>
             <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
+              <span>{elemento.dia}</span>
+              <strong>{elemento.descricao}</strong>
             </div>
-            <Value color={"negativo"}>120,00</Value>
+            <Value color={elemento.tipo==='entrada'&&"positivo"}>{elemento.valor}</Value>
           </ListItemContainer>
+            )
+          })}
+          
 
           <ListItemContainer>
             <div>
