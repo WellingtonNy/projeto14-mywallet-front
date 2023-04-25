@@ -15,6 +15,7 @@ export default function HomePage() {
   console.log(tk);
   console.log(usu);
   const [tra,setTra]=useState([])
+  const [saldo,setSaldo]=useState(0)
 
   
  function sair(){
@@ -45,6 +46,19 @@ alert(err.response.data)
 },[])
 
 
+useEffect(()=>{
+  let mont =0
+for (let i = 0; i < tra.length; i++) {
+  if(tra[i].tipo==='entrada'){
+  mont+=tra[i].valor
+  }else{
+    mont-=tra[i].valor
+  }
+  
+  setSaldo(mont)
+}
+},[])
+
 
   return (
     <HomeContainer>
@@ -69,19 +83,11 @@ alert(err.response.data)
             })}
           
           
-
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"positivo"}>3000,00</Value>
-          </ListItemContainer>
         </ul>
 
         <article>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
+          <Value color={"positivo"}>{saldo}</Value>
         </article>
       </TransactionsContainer>
 
