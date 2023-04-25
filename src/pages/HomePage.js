@@ -1,13 +1,55 @@
 import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import { useContext, useState } from "react"
+import { UserContext } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom"
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function HomePage() {
+  const {user,setUser} =useContext(UserContext)
+  const tk = user.token
+  const usu = user.usuario
+  const navigate = useNavigate()
+  console.log(tk);
+  console.log(usu);
+  const [tra,setTra]=useState()
+
+  
+ function sair(){
+  setUser({})
+  navigate("/")
+ }
+
+ 
+
+useEffect(() => {
+
+  const conf = {
+    headers: {
+      "authorization": tk
+    }
+  }
+
+  const promisse = axios.get('https://mywallet-27hy.onrender.com/transacao',conf)
+  
+  promisse.then(res => {
+    setTra(res.data)
+  })
+
+  promisse.catch((err) => {
+alert(err.response.data)
+  })
+},[])
+
+console.log(tra)
+
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
-        <BiExit />
+        <h1>Olá, {usu}</h1>
+        <BiExit onClick={sair} />
       </Header>
 
       <TransactionsContainer>
