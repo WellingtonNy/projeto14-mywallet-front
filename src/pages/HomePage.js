@@ -14,7 +14,7 @@ export default function HomePage() {
   const navigate = useNavigate()
   console.log(tk);
   console.log(usu);
-  const [tra,setTra]=useState(null)
+  const [tra,setTra]=useState([])
 
   
  function sair(){
@@ -36,6 +36,7 @@ useEffect(() => {
   
   promisse.then(res => {
     setTra(res.data)
+    console.log(tra);
   })
 
   promisse.catch((err) => {
@@ -54,18 +55,19 @@ alert(err.response.data)
 
       <TransactionsContainer>
         <ul>
-          
+
           {tra.map((elemento)=>{
-            return(
-            <ListItemContainer>
-            <div>
-              <span>{elemento.dia}</span>
-              <strong>{elemento.descricao}</strong>
-            </div>
-            <Value color={elemento.tipo==='entrada'&&"positivo"}>{elemento.valor}</Value>
-          </ListItemContainer>
-            )
-          })}
+              return(
+              <ListItemContainer>
+              <div>
+                <span>{elemento.dia}</span>
+                <strong>{elemento.descricao}</strong>
+              </div>
+              <Value color={elemento.tipo==='entrada'&&"positivo"}>{elemento.valor}</Value>
+            </ListItemContainer>
+              )
+            })}
+          
           
 
           <ListItemContainer>
