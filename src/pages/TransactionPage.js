@@ -9,12 +9,12 @@ import axios from "axios";
 
 
 export default function TransactionsPage() {
-
+  
+  const {tipo} = useParams()
   const [formulario, setFormulario] =useState({valor: '', descricao: '',tipo:tipo})
   const navigate = useNavigate()
   const {user} =useContext(UserContext)
   const tk = user.token
-  const {tipo} = useParams()
 
 function enviar(ele){
   ele.preventDefault()
@@ -48,7 +48,7 @@ function montar(ele) {
       <h1>Nova TRANSAÇÃO</h1>
       <form onSubmit={enviar}>
         <input placeholder="Valor" value={formulario.valor} onChange={montar} name="valor" type="text"/>
-        <input placeholder="Descrição" name="descrecao" value={formulario.descricao} onChange={montar} type="text" />
+        <input placeholder="Descrição" name="descricao" value={formulario.descricao} onChange={montar} type="text" />
         <button type="submit">Salvar TRANSAÇÃO</button>
       </form>
     </TransactionsContainer>
